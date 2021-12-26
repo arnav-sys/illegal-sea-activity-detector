@@ -43,9 +43,8 @@ jobs:
      # Step 2
       - name: Create CodeDeploy Deployment
         id: deploy
-        run: |
-          aws deploy create-deployment \
-            --application-name application-name \
-            --deployment-group-name AppDeploymentGroupName \
+        run: aws deploy create-deployment --application-name deploy
+            --application-name deploy
+            --deployment-group-name detector
             --deployment-config-name CodeDeployDefault.OneAtATime \
             --github-location repository=illegal-sea-activity-detector,commitId=e82cf1025c7a414a81ff92fa77cdfc53d046542d
