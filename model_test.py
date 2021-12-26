@@ -9,7 +9,7 @@ import joblib
 from sklearn.metrics import f1_score
 import pandas as pd
 
-df  = pd.read_csv("./encounter_data.csv")
+df  = pd.read_csv("./encounter.csv")
 
 #preprocessing the data
 from sklearn.preprocessing import MinMaxScaler
@@ -22,7 +22,7 @@ labels = ["start","id","end","vessel.id","vessel.type","vessel.flag","vessel.nam
 
 def encode_data():
     for label in labels:
-        df[label] = encoder.fit_transform(df[label])
+        df[label] = encoder.fit_transform(df[label].astype(str))
 
 encode_data()
 
@@ -49,4 +49,5 @@ def test_f1score():
         score == 0
     
     assert score == 1
+    
     
