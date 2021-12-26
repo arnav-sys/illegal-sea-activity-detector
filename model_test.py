@@ -9,7 +9,7 @@ import joblib
 from sklearn.metrics import f1_score
 import pandas as pd
 
-df  = pd.read_csv("./encounter_data.csv")
+df  = pd.read_csv("./encounter.csv")
 
 #preprocessing the data
 from sklearn.preprocessing import MinMaxScaler
