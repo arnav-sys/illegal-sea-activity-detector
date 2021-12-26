@@ -43,7 +43,7 @@ jobs:
      # Step 2
       - name: Create CodeDeploy Deployment
         id: deploy
-        run: aws deploy create-deployment --application-name deploy
-            --application-name deploy
+        run: aws deploy create-deployment
+            --application-name project-1
             --deployment-group-name detector
             --deployment-config-name CodeDeployDefault.OneAtATime \
