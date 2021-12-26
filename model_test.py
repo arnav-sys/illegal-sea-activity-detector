@@ -6,7 +6,7 @@ Created on Fri Dec 24 15:05:21 2021
 """
 
 import joblib
-from sklearn.metrics import f1_score
+from sklearn.metrics import  recall_score
 import pandas as pd
 
 df  = pd.read_csv("./encounter.csv")
@@ -41,7 +41,7 @@ def test_f1score():
     
     predictions = model.predict(X_test)
     
-    score = f1_score(predictions, y_test, average="weighted")
+    score = recall_score(predictions, y_test, average="weighted")
     
     if score > 0.9:
         score == 1
