@@ -35,4 +35,4 @@ jobs:
 # Run Unit tests- Specify unit tests here 
 
 # sam deploy
-      - run: sam deploy --no-confirm-changeset --guided
+      - run: sam deploy --guided
