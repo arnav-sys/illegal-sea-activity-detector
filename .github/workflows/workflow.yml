@@ -20,19 +20,3 @@ jobs:
       # Step 5
       - name: Build Application and Run unit Test
         run: python app.py
-  continuous-deployment:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      - uses: aws-actions/setup-sam@v1
-      - uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: AKIA4VVXTVMKIO5LYMWS
-          aws-secret-access-key: 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
-          aws-region: us-east-1
- 
-# Run Unit tests- Specify unit tests here 
-
-# sam deploy
-      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-app
