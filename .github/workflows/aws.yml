@@ -36,7 +36,7 @@ env:
   ECR_REPOSITORY: samapp7427b055/inferencefunction7c73919drepo           # set this to your Amazon ECR repository name
   ECS_SERVICE: final-service                 # set this to your Amazon ECS service name
   ECS_CLUSTER: final                 # set this to your Amazon ECS cluster name
-  ECS_TASK_DEFINITION: first-run-task-definition:1 # set this to the path to your Amazon ECS task definition
+  ECS_TASK_DEFINITION: first-run-task-definition # set this to the path to your Amazon ECS task definition
                                                # file, e.g. .aws/task-definition.json
   CONTAINER_NAME: final           # set this to the name of the container in the
                                                # containerDefinitions section of your task definition
