@@ -21,29 +21,27 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-access-key-id: AKIA4VVXTVMKBJOK5W6D
-          aws-secret-access-key: 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
-          aws-region: ap-southeast-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
       # Step 5
       - name: Build Application and Run unit Test
         run: python app.py
   continuous-deployment:
     runs-on: ubuntu-latest
-    needs: [continuous-integration]
-    if: github.ref == 'refs/heads/main'
     steps:
-      - uses: actions/checkout@v1
-      - name: build
-        run: sam build --template template.yaml
-      - name: zip
-        uses: montudor/action-zip@v0.1.0
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      - uses: aws-actions/setup-sam@v1
+      - uses: aws-actions/configure-aws-credentials@v1
         with:
-          args: zip -qq -r ./bundle.zip ./
-      - name: default deploy
-        uses: appleboy/lambda-action@master
-        with:
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws_region: eu-west-1
-          function_name: sam-app-InferenceFunction-SBgaOlofxd54
-          zip_file: bundle.zip
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+      # sam build 
+      - run: sam build --use-container
+
+# Run Unit tests- Specify unit tests here 
+
+# sam deploy
+      - run: sam deploy --no-confirm-changeset --no-fail-on-empty-changeset --stack-name sam-hello-world --s3-bucket ##s3-bucket## --capabilities CAPABILITY_IAM --region ##region##
