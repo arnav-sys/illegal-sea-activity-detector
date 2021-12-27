@@ -31,8 +31,6 @@ jobs:
           aws-access-key-id: AKIA4VVXTVMKIO5LYMWS
           aws-secret-access-key: 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
           aws-region: us-east-1
-      # sam build 
-      - run: sam build --use-container --template=template.yaml
  
 # Run Unit tests- Specify unit tests here 
 
