@@ -26,4 +26,24 @@ jobs:
           aws-region: ap-southeast-1
       # Step 5
       - name: Build Application and Run unit Test
-        run: python app.py 
+        run: python app.py
+  continuous-deployment:
+    runs-on: ubuntu-latest
+    needs: [continuous-integration]
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v1
+      - name: build
+        run: sam build --template template.yaml
+      - name: zip
+        uses: montudor/action-zip@v0.1.0
+        with:
+          args: zip -qq -r ./bundle.zip ./
+      - name: default deploy
+        uses: appleboy/lambda-action@master
+        with:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: eu-west-1
+          function_name: sam-app-InferenceFunction-SBgaOlofxd54
+          zip_file: bundle.zip
